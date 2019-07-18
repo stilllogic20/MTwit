@@ -23,10 +23,11 @@ from PyQt5.QtWidgets import (
 
 from system_hotkey import SystemHotkey
 
+from mTwit.notifications import notify, NotificationKind
 from mTwit.ui.ui_base import Win32Window
 from .ControlBase import HoverButton, QuitButton
-from .NotificationWindow import NotificationWindow, NotificationMode
 from .AuthWindow import AuthWindow
+
 
 class MainWindow(QMainWindow):
     iconPath = "resources/icon/send.png"
@@ -195,8 +196,7 @@ class MainWindow(QMainWindow):
         pass
 
     def makeDebugwindow(self, *args):
-        fav = NotificationWindow(self, message="Test Message.")
-        fav.show(NotificationMode.ERROR)
+        notify(NotificationKind.ERROR, "Test Message.")
         """
     try:
       raise MTwitError

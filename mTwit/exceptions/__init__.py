@@ -1,6 +1,6 @@
 # exceptions base
-from mTwit.ui import NotificationWindow as Ew
-from mTwit.ui.NotificationWindow import NotificationMode as Mode
+from mTwit.ui import NotificationWindow
+from mTwit.notifications import NotificationKind, notify
 from debtcollector import removals
 
 
@@ -13,9 +13,10 @@ class ErrorNotification(Exception):
 
     @removals.remove
     def show(self):  # Delete this
-        """Errorの通知を表示する"""
-        Ew(time=2000, message=self.reason).show(Mode.ERROR)
+        self.notify()
+
+    def notify(self):
+        notify(NotificationKind.ERROR, self.reason)
 
     def __str__(self):
         return self.reason
-
